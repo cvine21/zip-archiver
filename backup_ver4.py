@@ -6,13 +6,16 @@ import zipfile
 
 # 1. The files and directories to be backed up are
 # specified in a list.
-source = [
-	'/mnt/c/Users/Руфина/PycharmProjects/problem_solving',
-	'/mnt/c/Users/Руфина/PycharmProjects/python-test']
+source = ['/Users/cvine/projects']
 
 # 2. The backup must be stored in a
 # main backup directory
-target_dir = '/mnt/c/Users/Руфина/backup'
+target_dir = '/Users/cvine/backup'
+
+# Create target directory if it is not present
+if not os.path.exists(target_dir):
+	os.mkdir(target_dir)
+	print('Successfully created directory', target_dir)
 
 # 3. The files are backed up into a zip file.
 # 4. The current day is the name of the subdirectory
@@ -49,9 +52,9 @@ if not os.path.exists(today):
 
 # 5. Writing files to a zipfile
 print('Running:')
-with zipfile.ZipFile(target, 'w') as zip:
+with zipfile.ZipFile(target, 'w') as zipArchive:
 	for file in file_paths:
 		print('  adding:', file)
-		zip.write(file)
+		zipArchive.write(file)
 
 print('Successful backup to', target)
